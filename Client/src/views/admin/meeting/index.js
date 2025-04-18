@@ -80,8 +80,9 @@ const Index = () => {
     const fetchData = async () => {
         setIsLoding(true)
         const result = await dispatch(fetchMeetingData())
+		console.log(result);
         if (result.payload.status === 200) {
-            setData(result?.payload?.data);
+            setData(result?.payload?.data.data);
         } else {
             toast.error("Failed to fetch data", "error");
         }
@@ -91,7 +92,7 @@ const Index = () => {
     const handleDeleteMeeting = async (ids) => {
         try {
             setIsLoding(true)
-            let response = await deleteManyApi('api/meeting/deleteMany', ids)
+            let response = await deleteManyApi('api/meeting/deleteMany', { ids })
             if (response.status === 200) {
                 setSelectedValues([])
                 setDeleteMany(false)

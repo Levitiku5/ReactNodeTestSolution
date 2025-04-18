@@ -28,7 +28,7 @@ const View = () => {
 
     const fetchData = async () => {
         setIsLoding(true)
-        let response = await getApi('api/meeting/view/', param.id)
+        let response = await getApi('api/meeting/', param.id)
         setData(response?.data);
         setIsLoding(false)
     }
@@ -66,7 +66,7 @@ const View = () => {
     const handleDeleteMeeting = async (ids) => {
         try {
             setIsLoding(true)
-            let response = await deleteApi('api/meeting/delete/', params.id)
+            let response = await deleteApi('api/meeting/', params.id)
             if (response.status === 200) {
                 setDeleteMany(false)
                 navigate(-1)

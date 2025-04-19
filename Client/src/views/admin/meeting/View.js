@@ -25,11 +25,10 @@ const View = () => {
     const navigate = useNavigate()
     const params = useParams();
 
-
     const fetchData = async () => {
         setIsLoding(true)
         let response = await getApi('api/meeting/', param.id)
-        setData(response?.data);
+        setData(response?.data?.data);
         setIsLoding(false)
     }
 
@@ -121,11 +120,11 @@ const View = () => {
                                     </GridItem>
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
                                         <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Created By </Text>
-                                        <Text>{data?.createdByName ? data?.createdByName : ' - '}</Text>
+                                        <Text>{data?.createBy ? data?.createBy : ' - '}</Text>
                                     </GridItem>
 
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
-                                        <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> DateTime </Text>
+                                        <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Date & Time </Text>
                                         <Text> {data?.dateTime ? moment(data?.dateTime).format('DD-MM-YYYY  h:mma ') : ' - '} [{data?.dateTime ? moment(data?.dateTime).toNow() : ' - '}]</Text>
                                     </GridItem>
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -141,24 +140,24 @@ const View = () => {
                                         <Text>{data?.notes ? data?.notes : ' - '}</Text>
                                     </GridItem>
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
-                                        <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Attendes </Text>
-                                        {data?.related === 'Contact' && contactAccess?.view ? data?.attendes && data?.attendes.map((item) => {
+                                        <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Attendees </Text>
+                                        {data?.related === 'Contact' && contactAccess?.view ? data?.attendees && data?.attendees.map((item) => {
                                             return (
                                                 <Link to={`/contactView/${item._id}`}>
                                                     <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.firstName + ' ' + item.lastName}</Text>
                                                 </Link>
                                             )
-                                        }) : data?.related === 'Lead' && leadAccess?.view ? data?.attendesLead && data?.attendesLead.map((item) => {
+                                        }) : data?.related === 'Lead' && leadAccess?.view ? data?.attendeesLead && data?.attendeesLead.map((item) => {
                                             return (
                                                 <Link to={`/leadView/${item._id}`}>
                                                     <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.leadName}</Text>
                                                 </Link>
                                             )
-                                        }) : data?.related === 'contact' ? data?.attendes && data?.attendes.map((item) => {
+                                        }) : data?.related === 'contact' ? data?.attendees && data?.attendees.map((item) => {
                                             return (
                                                 <Text color='blackAlpha.900' >{item.firstName + ' ' + item.lastName}</Text>
                                             )
-                                        }) : data?.related === 'lead' ? data?.attendesLead && data?.attendesLead.map((item) => {
+                                        }) : data?.related === 'lead' ? data?.attendeesLead && data?.attendeesLead.map((item) => {
                                             return (
                                                 <Text color='blackAlpha.900' >{item.leadName}</Text>
                                             )

@@ -120,7 +120,7 @@ const View = () => {
                                     </GridItem>
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
                                         <Text fontSize="sm" fontWeight="bold" color={'blackAlpha.900'}> Created By </Text>
-                                        <Text>{data?.createBy ? data?.createBy : ' - '}</Text>
+                                        <Text>{data?.createdByName ? data?.createdByName : ' - '}</Text>
                                     </GridItem>
 
                                     <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -144,7 +144,7 @@ const View = () => {
                                         {data?.related === 'Contact' && contactAccess?.view ? data?.attendees && data?.attendees.map((item) => {
                                             return (
                                                 <Link to={`/contactView/${item._id}`}>
-                                                    <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.firstName + ' ' + item.lastName}</Text>
+                                                    <Text color='brand.600' sx={{ '&:hover': { color: 'blue.500', textDecoration: 'underline' } }}>{item.fullName}</Text>
                                                 </Link>
                                             )
                                         }) : data?.related === 'Lead' && leadAccess?.view ? data?.attendeesLead && data?.attendeesLead.map((item) => {
@@ -155,7 +155,7 @@ const View = () => {
                                             )
                                         }) : data?.related === 'contact' ? data?.attendees && data?.attendees.map((item) => {
                                             return (
-                                                <Text color='blackAlpha.900' >{item.firstName + ' ' + item.lastName}</Text>
+                                                <Text color='blackAlpha.900' >{item.fullName}</Text>
                                             )
                                         }) : data?.related === 'lead' ? data?.attendeesLead && data?.attendeesLead.map((item) => {
                                             return (

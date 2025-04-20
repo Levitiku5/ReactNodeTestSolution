@@ -13,7 +13,7 @@ export const fetchMeetingData = createAsyncThunk('fetchMeetingData', async () =>
 
 export const addMeeting = createAsyncThunk('addMeeting', async (meetingData) => {
     try {
-        const response = await postApi('api/meeting', meetingData);
+        const response = await postApi('api/meeting/add/', meetingData);
     	return response;
     } catch (error) {
         throw error;
@@ -22,7 +22,7 @@ export const addMeeting = createAsyncThunk('addMeeting', async (meetingData) => 
 
 export const viewMeeting = createAsyncThunk('viewMeeting', async (id) => {
     try {
-        const response = await getApi('api/meeting/' + id);
+        const response = await getApi('api/meeting/view/' + id);
     	return response;
     } catch (error) {
         throw error;
@@ -31,7 +31,7 @@ export const viewMeeting = createAsyncThunk('viewMeeting', async (id) => {
 
 export const deleteMeeting = createAsyncThunk('deleteMeeting', async (id) => {
     try {
-        const response = await deleteApi('api/meeting/' + id);
+        const response = await deleteApi('api/meeting/delete' + id);
     	return response;
     } catch (error) {
         throw error;

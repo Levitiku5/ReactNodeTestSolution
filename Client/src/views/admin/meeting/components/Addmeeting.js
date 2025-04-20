@@ -41,7 +41,7 @@ const AddMeeting = (props) => {
         onSubmit: async (values, { resetForm }) => {
             try {
                 setIsLoding(true);
-                const response = await postApi('api/meeting', values);
+                const response = await postApi('api/meeting/add', values);
                 if (response.status === 201) {
                     toast.success("Meeting added successfully!");
                     resetForm();

@@ -1,11 +1,38 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getApi } from '../../services/api'
+import { getApi, postApi, deleteApi } from '../../services/api'
 
 export const fetchMeetingData = createAsyncThunk('fetchMeetingData', async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     try {
         const response = await getApi(user.role === 'superAdmin' ? 'api/meeting' : `api/meeting/?createBy=${user._id}`);
-        return response;
+    	return response;
+    } catch (error) {
+        throw error;
+    }
+});
+
+export const addMeeting = createAsyncThunk('addMeeting', async (meetingData) => {
+    try {
+        const response = await postApi('api/meeting/add/', meetingData);
+    	return response;
+    } catch (error) {
+        throw error;
+    }
+});
+
+export const viewMeeting = createAsyncThunk('viewMeeting', async (id) => {
+    try {
+        const response = await getApi('api/meeting/view/' + id);
+    	return response;
+    } catch (error) {
+        throw error;
+    }
+});
+
+export const deleteMeeting = createAsyncThunk('deleteMeeting', async (id) => {
+    try {
+        const response = await deleteApi('api/meeting/delete' + id);
+    	return response;
     } catch (error) {
         throw error;
     }
